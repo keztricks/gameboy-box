@@ -52,6 +52,17 @@ void setupBug(){
     moveGameCharacter(&bug, bug.x, bug.y);
 }
 
+void movePlayer() {
+        if(joypad() & J_LEFT){
+            ship.x -= 2;
+            moveGameCharacter(&ship, ship.x, ship.y);
+        }
+        if(joypad() & J_RIGHT){
+            ship.x += 2;
+            moveGameCharacter(&ship, ship.x, ship.y);
+        }
+}
+
 void main() {
 
     printf("\n \n \n \n \n \n \n*** Press  Start ***");
@@ -66,7 +77,8 @@ void main() {
     SHOW_SPRITES;
 
     while(TRUE) {
-
+        movePlayer();
+        performantDelay(5);
     }
 
     printf("\n \n \n \n \n \n \n *** Game  Over ***");
