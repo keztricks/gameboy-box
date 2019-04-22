@@ -1,14 +1,12 @@
 #include <gb/gb.h>
 #include <stdio.h>
-
-void performantDelay(UINT8 numLoops) {
-    UINT8 i;
-    for (i = 0; i < numLoops; i++) {
-       wait_vbl_done();
-    }
-}
+#include "utils.c"
 
 void main() {
+
+    printf("\n \n \n \n \n \n \n*** Press  Start ***");
+    waitpad(J_START);
+    printf("\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n.");
 
     DISPLAY_ON;
     SHOW_SPRITES;
