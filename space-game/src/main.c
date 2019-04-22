@@ -1,11 +1,6 @@
 #include <gb/gb.h>
 #include <stdio.h>
 
-GameCharacter ship;
-GameCharacter bug;
-UBYTE spriteSize = 8;
-
-
 void performantDelay(UINT8 numLoops) {
     UINT8 i;
     for (i = 0; i < numLoops; i++) {
