@@ -53,14 +53,20 @@ void setupBug(){
 }
 
 void movePlayer() {
+
+    if(ship.x > 8){
         if(joypad() & J_LEFT){
             ship.x -= 2;
             moveGameCharacter(&ship, ship.x, ship.y);
         }
+    }
+    
+    if(ship.x + ship.width <= 166){
         if(joypad() & J_RIGHT){
             ship.x += 2;
             moveGameCharacter(&ship, ship.x, ship.y);
         }
+    }
 }
 
 void main() {
