@@ -3,6 +3,8 @@
 #include "utils.c"
 #include "GameCharacter.c"
 #include "../assets/shipBug-sprite.c"
+#include "../assets/star-sprite.c"
+#include "../assets/star-background.c"
 
 GameCharacter ship;
 GameCharacter bug;
@@ -91,7 +93,6 @@ void playGame() {
     setupShip();
     setupBug();
 
-    DISPLAY_ON;
     SHOW_SPRITES;
 
     while(TRUE) {
@@ -100,10 +101,10 @@ void playGame() {
         performantDelay(5);
 
         if (checkCollision(&ship, &bug)) {
-            printf("\n \n \n \n \n \n");
-            printf(" *** Game  Over ***\n \nHit Start to Restart\n \n \n \n \n \n \n \n \n \n");
+            //printf("\n \n \n \n \n \n");
+            //printf(" *** Game  Over ***\n \nHit Start to Restart\n \n \n \n \n \n \n \n \n \n");
             waitpad(J_START);
-            printf("\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n");
+            //printf("\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n");
             playGame();
         }
     }
@@ -111,9 +112,15 @@ void playGame() {
 void main() {
     //BYTE runMain = 1;
 
-    printf("\n \n \n \n \n \n \n*** Press  Start ***");
+    set_bkg_data(37, 7, star);
+    set_bkg_tiles(0, 0, 20, 18, starBackground);
+
+    DISPLAY_ON;
+    SHOW_BKG;
+
+    //printf("\n \n \n \n \n \n \n*** Press  Start ***");
     waitpad(J_START);
-    printf("\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n");
+    //printf("\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n");
 
     playGame();
 }
