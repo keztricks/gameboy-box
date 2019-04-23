@@ -1,10 +1,12 @@
 #include <gb/gb.h>
 #include <stdio.h>
+#include <gb/font.h>
 #include "utils.c"
 #include "GameCharacter.c"
 #include "../assets/shipBug-sprite.c"
 #include "../assets/star-sprite.c"
 #include "../assets/star-background.c"
+#include "../assets/window-map.c"
 
 GameCharacter ship;
 GameCharacter bug;
@@ -12,6 +14,7 @@ UBYTE spriteSize = 8;
 UINT8 enemyBaseSpeed = 5;
 UINT8 enemySpeedIncrease = 1;
 UINT8 enemySpeed;
+UINT8 score;
 
 void moveGameCharacter(GameCharacter* character, UINT8 x, UINT8 y) {  // * is pass by ref/pointer
     move_sprite(character->spriteIDs[0], x, y);
@@ -80,6 +83,7 @@ void moveEnemy() {
             bug.y=0;
             bug.x = ship.x;
             enemySpeed += enemySpeedIncrease;
+            score++;
         }
 }
 
@@ -88,12 +92,19 @@ UBYTE checkCollision(GameCharacter* firstCharacter, GameCharacter* secondCharact
 }
 
 void playGame() {
+    UINT8 score = 0;
+
+    set_win_tiles(0, 0, 10, 1, windowMap);
+    move_win(0, 135);
+
     enemySpeed = enemyBaseSpeed;
     set_sprite_data(0, 8, shipBug);
     setupShip();
     setupBug();
 
     SHOW_SPRITES;
+    SHOW_WIN;
+    SHOW_BKG;
 
     while(TRUE) {
         movePlayer();
@@ -111,8 +122,12 @@ void playGame() {
 }
 void main() {
     //BYTE runMain = 1;
+    font_t minFont;
+    font_init();
+    minFont = font_load(font_min);
+    font_set(minFont);
 
-    set_bkg_data(37, 7, star);
+    set_bkg_data(38, 7, star);
     set_bkg_tiles(0, 0, 20, 18, starBackground);
 
     DISPLAY_ON;
